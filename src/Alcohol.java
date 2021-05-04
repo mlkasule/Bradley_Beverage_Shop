@@ -46,19 +46,19 @@ public class Alcohol extends Beverage {
 
 		if (getSize().equals(SIZE.SMALL)) {
 			if (isOfferedWeekend() == true)
-				price = getBASE_PRICE() + WEEKEND_BEV_COST;
+				price = getBasePrice() + WEEKEND_BEV_COST;
 			else
-				price = getBASE_PRICE();
+				price = getBasePrice();
 		} else if (getSize().equals(SIZE.MEDIUM)) {
 			if (isOfferedWeekend() == true)
-				price = getBASE_PRICE() + WEEKEND_BEV_COST + (getSIZE_PRICE() * 2);
+				price = getBasePrice() + WEEKEND_BEV_COST + (getSIZE_PRICE() * 2);
 			else
-				price = getBASE_PRICE() + (getSIZE_PRICE() * 2);
+				price = getBasePrice() + (getSIZE_PRICE() * 2);
 		} else if (getSize().equals(SIZE.LARGE)) {
 			if (isOfferedWeekend() == true)
-				price = getBASE_PRICE() + WEEKEND_BEV_COST + (getSIZE_PRICE() * 3);
+				price = getBasePrice() + WEEKEND_BEV_COST + (getSIZE_PRICE() * 3);
 			else
-				price = getBASE_PRICE() + (getSIZE_PRICE() * 3);
+				price = getBasePrice() + (getSIZE_PRICE() * 3);
 		}
 		return price;
 
@@ -77,7 +77,7 @@ public class Alcohol extends Beverage {
 
 		boolean compare = false;
 
-		if (getName().equals(bevName) && getType().equals(bevType) && getSize().equals(bevSize))
+		if (getBevName().equals(bevName) && getType().equals(bevType) && getSize().equals(bevSize))
 			compare = true;
 
 		return compare;
@@ -89,7 +89,7 @@ public class Alcohol extends Beverage {
 	 */
 	public String toString() {
 
-		String str = "Name: " + getName() + "\nSize: " + getSize() + "\nOffered of Weekend: " + isOfferedWeekend()
+		String str = "Name: " + getBevName() + "\nSize: " + getSize() + "\nOffered of Weekend: " + isOfferedWeekend()
 				+ "\nPrice: " + calcPrice();
 		return str;
 	}

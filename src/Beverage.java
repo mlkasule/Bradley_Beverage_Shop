@@ -37,11 +37,11 @@ public abstract class Beverage {
 
 	// METHODS
 
-	public String getName() {
+	public String getBevName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setBevName(String name) {
 		this.name = name;
 	}
 
@@ -61,7 +61,7 @@ public abstract class Beverage {
 		this.size = size;
 	}
 
-	public double getBASE_PRICE() {
+	public double getBasePrice() {
 		return BASE_PRICE;
 	}
 

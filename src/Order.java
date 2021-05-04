@@ -10,24 +10,24 @@ public class Order implements OrderInterface, Comparable {
 	private Customer custObj;
 	private ArrayList<Beverage> bevList; // list of beverages
 
-	public Order(int orderNumber, int orderTime, DAY orderDay, String customer, int customerAge,
-			ArrayList<Beverage> bevList) {
+	public Order(int orderNumber, int orderTime, DAY orderDay, String customer, int customerAge) {
 
 		this.orderNumber = orderNumber;
 		this.orderTime = orderTime;
 		this.orderDay = orderDay;
 		this.customer = customer;
 		this.customerAge = customerAge;
-		this.bevList = bevList;
+		this.bevList = new ArrayList<>();
 	}
 
-	public Order(int orderTime, DAY orderDay, String customer, int customerAge, ArrayList<Beverage> bevList) {
+	public Order(int orderTime, DAY orderDay, Customer customer) {
 
 		this.orderTime = orderTime;
 		this.orderDay = orderDay;
-		this.customer = customer;
-		this.customerAge = customerAge;
-		this.bevList = bevList;
+		this.custObj = customer;
+		this.customer = customer.getName();
+		this.customerAge = customer.getAge();
+		this.bevList = new ArrayList<>();
 	}
 
 	public Order(Order orderList) {
@@ -41,11 +41,11 @@ public class Order implements OrderInterface, Comparable {
 		this.custObj = orderList.custObj;
 	}
 
-	public int getOrderNumber() {
+	public int getOrderNo() {
 		return orderNumber;
 	}
 
-	public void setOrderNumber(int orderNumber) {
+	public void setOrderNo(int orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
@@ -88,7 +88,7 @@ public class Order implements OrderInterface, Comparable {
 	public void setCustomerAge(int customerAge) {
 		this.customerAge = customerAge;
 	}
-	
+
 	public ArrayList<Beverage> getBevList() {
 
 		for (int i = 0; i < bevList.size(); i++) {
@@ -122,8 +122,10 @@ public class Order implements OrderInterface, Comparable {
 	 *                   otherwise
 	 */
 	public void addNewBeverage(String bevName, SIZE size, boolean extraShot, boolean extraSyrup) {
-
+		
+		//new coffee order
 		Coffee newCoffee = new Coffee(bevName, size, extraShot, extraSyrup);
+		//add to bev list
 		bevList.add(newCoffee);
 
 		// use for loop to add , set idex
@@ -138,7 +140,9 @@ public class Order implements OrderInterface, Comparable {
 	 */
 	public void addNewBeverage(String bevName, SIZE size) {
 
+		// new alcohol order
 		Alcohol newAlcohol = new Alcohol(bevName, size, false);
+		// add to bev list
 		bevList.add(newAlcohol);
 
 	}
@@ -153,12 +157,11 @@ public class Order implements OrderInterface, Comparable {
 	 */
 	public void addNewBeverage(String bevName, SIZE size, int numOfFruits, boolean addProtien) {
 
-		Smoothie newSmothie = new Smoothie(bevName, size, numOfFruits, addProtien);
-		bevList.add(newSmothie);
-		
-		for(int i = 0; i < bevList.size(); i++) {
-			bevList.add(newSmothie);
-		}
+		// new smoothie order
+		Smoothie newSmoothie = new Smoothie(bevName, size, numOfFruits, addProtien);
+
+		// add to bev list
+		bevList.add(newSmoothie);
 	}
 
 	/**
@@ -202,18 +205,18 @@ public class Order implements OrderInterface, Comparable {
 	public int compareTo(Order orderNumber) {
 		int status = -2;
 
-		if (orderNumber.equals(getOrderNumber()))
+		if (orderNumber.equals(getOrderNo()))
 			status = 0;
-		else if ((Integer.parseInt(String.valueOf(orderNumber))) > getOrderNumber())
+		else if ((Integer.parseInt(String.valueOf(orderNumber))) > getOrderNo())
 			status = 1;
-		else if ((Integer.parseInt(String.valueOf(orderNumber))) < getOrderNumber())
+		else if ((Integer.parseInt(String.valueOf(orderNumber))) < getOrderNo())
 			status = -1;
 		return status;
 	}
 
 	@Override
 	public String toString() {
-		String str = "Order Number: " + getOrderNumber() + "\nOrder time: " + getOrderTime() + "\nOrder day: "
+		String str = "Order Number: " + getOrderNo() + "\nOrder time: " + getOrderTime() + "\nOrder day: "
 				+ getOrderDay() + "\nCustomer name: " + getCustomer() + " Age: " + getCustomerAge() + "\nBeverages: "
 				+ getBevList();
 		return str;
@@ -222,19 +225,32 @@ public class Order implements OrderInterface, Comparable {
 
 	@Override
 	public boolean isWeekend() {
-		// TODO Auto-generated method stub
-		return false;
+		if (getOrderDay().equals(DAY.SATURDAY))
+			return true;
+		else
+			return false;
 	}
 
 	@Override
 	public Beverage getBeverage(int itemNo) {
-		// TODO Auto-generated method stub
-		return null;
+		// beverage at itemNo
+		bevList.get(itemNo);
+
+		for (int i = 0; i < bevList.size(); i++) {
+			if (i == itemNo) {
+				bevList.get(itemNo);
+			}
+		}
+		return bevList.get(itemNo);
+	}
+
+	public int getTotalItems() {
+
+		return bevList.size();
 	}
 
 	@Override
 	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

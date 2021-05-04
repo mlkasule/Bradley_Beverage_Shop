@@ -23,19 +23,19 @@ public class Coffee extends Beverage {
 		this.extraShotSyrup = extraShotSyrup;
 	}
 
-	public boolean isExtraShotCoffee() {
+	public boolean getExtraShot() {
 		return extraShotCoffee;
 	}
 
-	public void setExtraShotCoffee(boolean extraShotCoffee) {
+	public void setExtraShot(boolean extraShotCoffee) {
 		this.extraShotCoffee = extraShotCoffee;
 	}
 
-	public boolean isExtraShotSyrup() {
+	public boolean getExtraSyrup() {
 		return extraShotSyrup;
 	}
 
-	public void setExtraShotSyrup(boolean extraShotSyrup) {
+	public void setExtraSyrup(boolean extraShotSyrup) {
 		this.extraShotSyrup = extraShotSyrup;
 	}
 
@@ -51,35 +51,35 @@ public class Coffee extends Beverage {
 
 		if (getSize().equals(SIZE.SMALL)) {
 
-			if (isExtraShotCoffee() == true)
-				price = getBASE_PRICE() + COFFEE_SHOT;
-			else if (isExtraShotSyrup() == true)
-				price = getBASE_PRICE() + EXTRA_SYRUP;
-			else if (isExtraShotCoffee() == true && isExtraShotSyrup() == true)
-				price = getBASE_PRICE() + EXTRA_SYRUP + EXTRA_SYRUP;
+			if (getExtraShot() == true)
+				price = getBasePrice() + COFFEE_SHOT;
+			else if (getExtraSyrup() == true)
+				price = getBasePrice() + EXTRA_SYRUP;
+			else if (getExtraShot() == true && getExtraSyrup() == true)
+				price = getBasePrice() + EXTRA_SYRUP + EXTRA_SYRUP;
 			else
-				price = getBASE_PRICE();
+				price = getBasePrice();
 
 		} else if (getSize().equals(SIZE.MEDIUM)) {
 
-			if (isExtraShotCoffee() == true)
-				price = (getBASE_PRICE() + COFFEE_SHOT) + (getSIZE_PRICE() * 2);
-			else if (isExtraShotSyrup() == true)
-				price = (getBASE_PRICE() + EXTRA_SYRUP) + (getSIZE_PRICE() * 2);
-			else if (isExtraShotCoffee() == true && isExtraShotSyrup() == true)
-				price = (getBASE_PRICE() + COFFEE_SHOT + EXTRA_SYRUP) * (getSIZE_PRICE() * 2);
+			if (getExtraShot() == true)
+				price = (getBasePrice() + COFFEE_SHOT) + (getSIZE_PRICE() * 2);
+			else if (getExtraSyrup() == true)
+				price = (getBasePrice() + EXTRA_SYRUP) + (getSIZE_PRICE() * 2);
+			else if (getExtraShot() == true && getExtraSyrup() == true)
+				price = (getBasePrice() + COFFEE_SHOT + EXTRA_SYRUP) * (getSIZE_PRICE() * 2);
 			else
-				price = getBASE_PRICE() * (getSIZE_PRICE() * 2);
+				price = getBasePrice() * (getSIZE_PRICE() * 2);
 
 		} else if (getSize().equals(SIZE.LARGE)) {
-			if (isExtraShotCoffee() == true)
-				price = (getBASE_PRICE() + COFFEE_SHOT) + (getSIZE_PRICE() * 3);
-			else if (isExtraShotSyrup() == true)
-				price = (getBASE_PRICE() + EXTRA_SYRUP) + (getSIZE_PRICE() * 3);
-			else if (isExtraShotCoffee() == true && isExtraShotSyrup() == true)
-				price = (getBASE_PRICE() + COFFEE_SHOT + EXTRA_SYRUP) + (getSIZE_PRICE() * 3);
+			if (getExtraShot() == true)
+				price = (getBasePrice() + COFFEE_SHOT) + (getSIZE_PRICE() * 3);
+			else if (getExtraSyrup() == true)
+				price = (getBasePrice() + EXTRA_SYRUP) + (getSIZE_PRICE() * 3);
+			else if (getExtraShot() == true && getExtraSyrup() == true)
+				price = (getBasePrice() + COFFEE_SHOT + EXTRA_SYRUP) + (getSIZE_PRICE() * 3);
 			else
-				price = getBASE_PRICE() * (getSIZE_PRICE() * 3);
+				price = getBasePrice() * (getSIZE_PRICE() * 3);
 		}
 
 		return price;
@@ -98,7 +98,7 @@ public class Coffee extends Beverage {
 
 		boolean compare = false;
 
-		if (getName().equals(bevName) && getType().equals(bevType) && getSize().equals(bevSize))
+		if (getBevName().equals(bevName) && getType().equals(bevType) && getSize().equals(bevSize))
 			compare = true;
 
 		return compare;
@@ -110,8 +110,8 @@ public class Coffee extends Beverage {
 	 */
 	public String toString() {
 
-		String str = "Name: " + getName() + "\nSize: " + getSize() + "\nExtra Coffee Shot: " + isExtraShotCoffee()
-				+ " Extra Syrup Shot:  " + isExtraShotSyrup() + "\nPrice: " + calcPrice();
+		String str = "Name: " + getBevName() + "\nSize: " + getSize() + "\nExtra Coffee Shot: " + getExtraShot()
+				+ " Extra Syrup Shot:  " + getExtraSyrup() + "\nPrice: " + calcPrice();
 		return str;
 	}
 

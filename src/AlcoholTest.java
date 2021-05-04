@@ -23,10 +23,10 @@ public class AlcoholTest {
 
 	@Test
 	public void testGetBasePrice() {
-		assertEquals(2.0, a1.getBASE_PRICE(), .01);
-		assertEquals(2.0, a2.getBASE_PRICE(), .01);
-		assertEquals(2.0, a3.getBASE_PRICE(), .01);
-		assertEquals(2.0, a4.getBASE_PRICE(), .01);
+		assertEquals(2.0, a1.getBasePrice(), .01);
+		assertEquals(2.0, a2.getBasePrice(), .01);
+		assertEquals(2.0, a3.getBasePrice(), .01);
+		assertEquals(2.0, a4.getBasePrice(), .01);
 	}
 
 	@Test
@@ -41,7 +41,7 @@ public class AlcoholTest {
 	@Test
 	public void testToString() {
 
-		assertTrue(a1.toString().contains(a1.getName()));
+		assertTrue(a1.toString().contains(a1.getBevName()));
 		assertTrue(a1.toString().contains(String.valueOf(a1.calcPrice())));
 		assertTrue(a1.toString().contains(a1.getSize().toString()));
 

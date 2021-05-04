@@ -31,7 +31,7 @@ public class Smoothie extends Beverage {
 		this.numOfFruits = numOfFruits;
 	}
 
-	public boolean getAddProtein() {
+	public boolean getAddProtien() {
 		return addProtein;
 	}
 
@@ -46,35 +46,35 @@ public class Smoothie extends Beverage {
 
 		if (getSize().equals(SIZE.SMALL)) {
 
-			if (getAddProtein() == true && getNumOfFruits() > 1)
-				price = getBASE_PRICE() + PROTEIN_COST + (numOfFruits - 1 * EXTRA_FRUIT);
-			else if (getAddProtein() == true && getNumOfFruits() == 1)
-				price = getBASE_PRICE() + PROTEIN_COST;
-			else if (getAddProtein() == false && getNumOfFruits() > 1)
-				price = getBASE_PRICE() + (numOfFruits - 1 * EXTRA_FRUIT);
+			if (getAddProtien() == true && getNumOfFruits() > 1)
+				price = getBasePrice() + PROTEIN_COST + (numOfFruits - 1 * EXTRA_FRUIT);
+			else if (getAddProtien() == true && getNumOfFruits() == 1)
+				price = getBasePrice() + PROTEIN_COST;
+			else if (getAddProtien() == false && getNumOfFruits() > 1)
+				price = getBasePrice() + (numOfFruits - 1 * EXTRA_FRUIT);
 			else
-				price = getBASE_PRICE();
+				price = getBasePrice();
 
 		} else if (getSize().equals(SIZE.MEDIUM)) {
-			if (getAddProtein() == true && getNumOfFruits() > 1)
-				price = getBASE_PRICE() + PROTEIN_COST + (numOfFruits - 1 * EXTRA_FRUIT) + (getSIZE_PRICE() * 2);
-			else if (getAddProtein() == true && getNumOfFruits() == 1)
-				price = getBASE_PRICE() + PROTEIN_COST + (getSIZE_PRICE() * 2);
-			else if (getAddProtein() == false && getNumOfFruits() > 1)
-				price = getBASE_PRICE() + (numOfFruits - 1 * EXTRA_FRUIT) + (getSIZE_PRICE() * 2);
+			if (getAddProtien() == true && getNumOfFruits() > 1)
+				price = getBasePrice() + PROTEIN_COST + (numOfFruits - 1 * EXTRA_FRUIT) + (getSIZE_PRICE() * 2);
+			else if (getAddProtien() == true && getNumOfFruits() == 1)
+				price = getBasePrice() + PROTEIN_COST + (getSIZE_PRICE() * 2);
+			else if (getAddProtien() == false && getNumOfFruits() > 1)
+				price = getBasePrice() + (numOfFruits - 1 * EXTRA_FRUIT) + (getSIZE_PRICE() * 2);
 			else
-				price = getBASE_PRICE() + (getSIZE_PRICE() * 2);
+				price = getBasePrice() + (getSIZE_PRICE() * 2);
 
 		} else if (getSize().equals(SIZE.LARGE)) {
 
-			if (getAddProtein() == true && getNumOfFruits() > 1)
-				price = getBASE_PRICE() + PROTEIN_COST + (numOfFruits - 1 * EXTRA_FRUIT) + (getSIZE_PRICE() * 3);
-			else if (getAddProtein() == true && getNumOfFruits() == 1)
-				price = getBASE_PRICE() + PROTEIN_COST + (getSIZE_PRICE() * 3);
-			else if (getAddProtein() == false && getNumOfFruits() > 1)
-				price = getBASE_PRICE() + (numOfFruits - 1 * EXTRA_FRUIT) + (getSIZE_PRICE() * 3);
+			if (getAddProtien() == true && getNumOfFruits() > 1)
+				price = getBasePrice() + PROTEIN_COST + (numOfFruits - 1 * EXTRA_FRUIT) + (getSIZE_PRICE() * 3);
+			else if (getAddProtien() == true && getNumOfFruits() == 1)
+				price = getBasePrice() + PROTEIN_COST + (getSIZE_PRICE() * 3);
+			else if (getAddProtien() == false && getNumOfFruits() > 1)
+				price = getBasePrice() + (numOfFruits - 1 * EXTRA_FRUIT) + (getSIZE_PRICE() * 3);
 			else
-				price = getBASE_PRICE() + (getSIZE_PRICE() * 3);
+				price = getBasePrice() + (getSIZE_PRICE() * 3);
 
 		}
 
@@ -94,7 +94,7 @@ public class Smoothie extends Beverage {
 
 		boolean compare = false;
 
-		if (getName().equals(bevName) && getType().equals(bevType) && getSize().equals(bevSize))
+		if (getBevName().equals(bevName) && getType().equals(bevType) && getSize().equals(bevSize))
 			compare = true;
 
 		return compare;
@@ -106,7 +106,7 @@ public class Smoothie extends Beverage {
 	 */
 	public String toString() {
 
-		String str = "Name: " + getName() + "\nSize: " + getSize() + "\nExtra Protein: " + getAddProtein()
+		String str = "Name: " + getBevName() + "\nSize: " + getSize() + "\nExtra Protein: " + getAddProtien()
 				+ "\nNumber of Fruits:  " + getNumOfFruits() + "\nPrice: " + calcPrice();
 		return str;
 	}
