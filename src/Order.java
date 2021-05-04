@@ -65,7 +65,7 @@ public class Order implements OrderInterface, Comparable {
 		this.orderDay = orderDay;
 	}
 
-	public Customer getCustomerObj() {
+	public Customer getCustomer() {
 		return new Customer(custObj);
 	}
 
@@ -73,11 +73,11 @@ public class Order implements OrderInterface, Comparable {
 		this.custObj = new Customer(customerObj);
 	}
 
-	public void setCustomer(String customer) {
+	public void setCustomerName(String customer) {
 		this.customer = customer;
 	}
 
-	public String getCustomer() {
+	public String getCustomerName() {
 		return customer;
 	}
 
@@ -155,6 +155,10 @@ public class Order implements OrderInterface, Comparable {
 
 		Smoothie newSmothie = new Smoothie(bevName, size, numOfFruits, addProtien);
 		bevList.add(newSmothie);
+		
+		for(int i = 0; i < bevList.size(); i++) {
+			bevList.add(newSmothie);
+		}
 	}
 
 	/**

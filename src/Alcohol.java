@@ -10,9 +10,8 @@ public class Alcohol extends Beverage {
 	private final double WEEKEND_BEV_COST = 0.60;
 
 	// constructors
-	public Alcohol(String name, TYPE type, SIZE size, boolean offeredWeekend) {
-		super(name, type, size);
-		this.offeredWeekend = offeredWeekend;
+	public Alcohol(String name, SIZE size) {
+		super(name, size);
 	}
 	public Alcohol(String name, SIZE size, boolean offeredWeekend) {
 		super(name, size);

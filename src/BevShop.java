@@ -9,6 +9,7 @@ public class BevShop implements BevShopInterface {
 	private int customerAge;
 	private final int MINIMUM_AGE = 21; // minimum age to drink
 	private final int MAX_ALCOHOL_DRINKS = 3; // maximum drinks
+	private final int MAX_FRUIT = 5; // Maximum number of fruits that this shop offers for SMOOTHIE beverage
 	private ArrayList<Order> orderList; // list of orders
 
 	public BevShop(int numOfAlcohol_Drinks, ArrayList<Beverage> bevList, int time, DAY orderDay, String customer,
@@ -143,10 +144,15 @@ public class BevShop implements BevShopInterface {
 	public void startNewOrder(int time, DAY day, String customerName, int customerAge) {
 
 		Order newOrder = new Order(time, day, customerName, customerAge, null);
+		//size is null
+		orderList.add(newOrder);
 
-		int orderNumber = newOrder.getRandomNum(); // order number
-
-		// for loop ot make new orders
+			
+		
+		// for loop to make new orders
+		for(int i = 0; i < orderList.size(); i++) {
+			orderList.set(i, newOrder);
+		}
 
 	}
 
@@ -163,9 +169,11 @@ public class BevShop implements BevShopInterface {
 	 */
 
 	public void processCoffeeOrder(String bevName, SIZE size, boolean extraShot, boolean extraSyrup) {
+		
+		Coffee newCoffee = new Coffee(bevName, size, extraShot, extraSyrup);
 
 		for (int i = 0; i < orderList.size(); i++) {
-			orderList.get(i).addNewBeverage(bevName, size, extraShot, extraSyrup);
+			orderList.get(i).getBevList().set(i, newCoffee);
 		}
 	}
 
@@ -177,8 +185,11 @@ public class BevShop implements BevShopInterface {
 	 * @param size    beverage size
 	 */
 	public void processAlcoholOrder(String bevName, SIZE size) {
+		
+		Alcohol newAlcohol = new Alcohol(bevName, size);
+		
 		for (int i = 0; i < orderList.size(); i++) {
-			orderList.get(i).addNewBeverage(bevName, size);
+			orderList.get(i).getBevList().set(i, newAlcohol);
 		}
 	}
 
@@ -192,9 +203,11 @@ public class BevShop implements BevShopInterface {
 	 * @param addProtien  true if protein is added , false otherwise
 	 */
 	public void processSmoothieOrder(String bevName, SIZE size, int numOfFruits, boolean addProtien) {
+		
+		Smoothie newSmoothie = new Smoothie(bevName, size, numOfFruits, addProtien);
 
 		for (int i = 0; i < orderList.size(); i++)
-			orderList.get(i).addNewBeverage(bevName, size, numOfFruits, addProtien);
+			orderList.get(i).getBevList().set(i, newSmoothie);
 	}
 
 	/**
@@ -301,6 +314,42 @@ public class BevShop implements BevShopInterface {
 		String str = "Orders: \n" + totalMonthlySale() + "\n";
 
 		return str + " Monthly Sales: " + totalMonthlySale();
+	}
+
+	/**
+	 * 
+	 * @return max order for alcohol drinks
+	 */
+	public int getMaxOrderForAlcohol() {
+
+		return MAX_ALCOHOL_DRINKS;
+	}
+
+	/**
+	 * Check minimum age
+	 * 
+	 * @return minimum age to drink
+	 */
+	public int getMinAgeForAlcohol() {
+
+		return MINIMUM_AGE;
+	}
+
+	public Order getCurrentOrder() {
+		return new Order(time, orderDay, customer, customerAge, bevList);
+	}
+
+	public boolean isMaxFruit(int numOfFruits) {
+		boolean maxNum = false;
+
+		for (int i = 0; i < orderList.size(); i++) {
+			if (orderList.get(i).getBeverage(i).getType().equals(TYPE.SMOOTHIE)) {
+				if (numOfFruits == MAX_FRUIT) {
+					maxNum = true;
+				}
+			}
+		}
+		return maxNum;
 	}
 
 }
