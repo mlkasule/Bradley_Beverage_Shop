@@ -1,5 +1,5 @@
 /**
- * Thsi class holds details about the alcohol class
+ * This class holds details about the alcohol class
  * 
  * @author Mark Kasule
  *
@@ -12,6 +12,10 @@ public class Alcohol extends Beverage {
 	// constructors
 	public Alcohol(String name, TYPE type, SIZE size, boolean offeredWeekend) {
 		super(name, type, size);
+		this.offeredWeekend = offeredWeekend;
+	}
+	public Alcohol(String name, SIZE size, boolean offeredWeekend) {
+		super(name, size);
 		this.offeredWeekend = offeredWeekend;
 	}
 

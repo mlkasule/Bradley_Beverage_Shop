@@ -2,22 +2,36 @@ import java.util.ArrayList;
 
 public class BevShop implements BevShopInterface {
 	private int numOfAlcohol_Drinks;
-	private ArrayList<Integer> orderList; // list of orders
+	private ArrayList<Beverage> bevList; // list of beverages
 	private int time; // time
 	private DAY orderDay; // day order was placed
-	private Customer customer; // customer name and age
+	private String customer; // customer name and age
+	private int customerAge;
 	private final int MINIMUM_AGE = 21; // minimum age to drink
 	private final int MAX_ALCOHOL_DRINKS = 3; // maximum drinks
-	private ArrayList<Order> bevList; // list of beverages
+	private ArrayList<Order> orderList; // list of orders
 
-	public BevShop(int numOfAlcohol_Drinks, ArrayList<Integer> orderList, int time, DAY orderDay, Customer customer,
-			ArrayList<Order> bevList) {
+	public BevShop(int numOfAlcohol_Drinks, ArrayList<Beverage> bevList, int time, DAY orderDay, String customer,
+			ArrayList<Order> orderList) {
 		this.numOfAlcohol_Drinks = numOfAlcohol_Drinks;
-		this.orderList = orderList;
+		this.bevList = bevList;
 		this.time = time;
 		this.orderDay = orderDay;
 		this.customer = customer;
-		this.bevList = bevList;
+		this.orderList = orderList;
+	}
+
+	public BevShop(BevShop obj) {
+		this.numOfAlcohol_Drinks = obj.numOfAlcohol_Drinks;
+		this.bevList = obj.bevList;
+		this.time = obj.time;
+		this.orderDay = obj.orderDay;
+		this.customer = obj.customer;
+		this.orderList = obj.orderList;
+	}
+
+	public BevShop() {
+		// no-arg constructor
 	}
 
 	public int getNumOfAlcohol_Drinks() {
@@ -28,12 +42,12 @@ public class BevShop implements BevShopInterface {
 		this.numOfAlcohol_Drinks = numOfAlcohol_Drinks;
 	}
 
-	public ArrayList<Integer> getOrderList() {
-		return orderList;
+	public ArrayList<Beverage> getBevList() {
+		return bevList;
 	}
 
-	public void setOrderList(ArrayList<Integer> orderList) {
-		this.orderList = orderList;
+	public void setBevList(ArrayList<Beverage> bevList) {
+		this.bevList = bevList;
 	}
 
 	public DAY getOrderDay() {
@@ -44,20 +58,28 @@ public class BevShop implements BevShopInterface {
 		this.orderDay = orderDay;
 	}
 
-	public Customer getCustomer() {
+	public String getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
 
-	public ArrayList<Order> getBevList() {
-		return bevList;
+	public int getCustomerAge() {
+		return customerAge;
 	}
 
-	public void setBevList(ArrayList<Order> bevList) {
-		this.bevList = bevList;
+	public void setCustomerAge(int customerAge) {
+		this.customerAge = customerAge;
+	}
+
+	public ArrayList<Order> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(ArrayList<Order> orderList) {
+		this.orderList = orderList;
 	}
 
 	/**
@@ -82,6 +104,16 @@ public class BevShop implements BevShopInterface {
 	 *         the maximum , false otherwise
 	 */
 	public boolean eligibleForMore() {
+		int count = 0;
+		boolean reachedMax = false;
+		for (int i = 0; i < bevList.size(); i++) {
+			if (bevList.get(i).getType().equals(TYPE.ALCOHOL)) {
+				count++;
+				if (count == MAX_ALCOHOL_DRINKS)
+					reachedMax = true;
+			}
+		}
+		return reachedMax;
 	}
 
 	/**
@@ -92,6 +124,11 @@ public class BevShop implements BevShopInterface {
 	 *         otherwise
 	 */
 	public boolean validAge(int age) {
+
+		if (age >= MINIMUM_AGE)
+			return true;
+		else
+			return false;
 	}
 
 	/**
@@ -104,6 +141,13 @@ public class BevShop implements BevShopInterface {
 	 */
 
 	public void startNewOrder(int time, DAY day, String customerName, int customerAge) {
+
+		Order newOrder = new Order(time, day, customerName, customerAge, null);
+
+		int orderNumber = newOrder.getRandomNum(); // order number
+
+		// for loop ot make new orders
+
 	}
 
 	/**
@@ -119,6 +163,10 @@ public class BevShop implements BevShopInterface {
 	 */
 
 	public void processCoffeeOrder(String bevName, SIZE size, boolean extraShot, boolean extraSyrup) {
+
+		for (int i = 0; i < orderList.size(); i++) {
+			orderList.get(i).addNewBeverage(bevName, size, extraShot, extraSyrup);
+		}
 	}
 
 	/**
@@ -129,6 +177,9 @@ public class BevShop implements BevShopInterface {
 	 * @param size    beverage size
 	 */
 	public void processAlcoholOrder(String bevName, SIZE size) {
+		for (int i = 0; i < orderList.size(); i++) {
+			orderList.get(i).addNewBeverage(bevName, size);
+		}
 	}
 
 	/**
@@ -141,6 +192,9 @@ public class BevShop implements BevShopInterface {
 	 * @param addProtien  true if protein is added , false otherwise
 	 */
 	public void processSmoothieOrder(String bevName, SIZE size, int numOfFruits, boolean addProtien) {
+
+		for (int i = 0; i < orderList.size(); i++)
+			orderList.get(i).addNewBeverage(bevName, size, numOfFruits, addProtien);
 	}
 
 	/**
@@ -150,7 +204,18 @@ public class BevShop implements BevShopInterface {
 	 * @return the index of the order in the list of Orders if found or -1 if not
 	 *         found
 	 */
+
 	public int findOrder(int orderNo) {
+
+		int found = 0;
+		for (int i = 0; i < orderList.size(); i++) {
+			if (orderList.get(i).getOrderNumber() == orderNo)
+				found = i;
+			else
+				found = -1;
+		}
+		return found;
+
 	}
 
 	/**
@@ -161,6 +226,15 @@ public class BevShop implements BevShopInterface {
 	 * @returns the calculated price on this order.
 	 */
 	public double totalOrderPrice(int orderNo) {
+
+		double total = 0;
+
+		for (int i = 0; i < orderList.size(); i++) {
+			if (orderList.get(i).getOrderNumber() == orderNo) {
+				total += bevList.get(i).calcPrice();
+			}
+		}
+		return total;
 	}
 
 	/**
@@ -169,12 +243,35 @@ public class BevShop implements BevShopInterface {
 	 * @return the total sale of all the orders
 	 */
 	public double totalMonthlySale() {
+		double total = 0;
+
+		for (int i = 0; i < orderList.size(); i++) {
+			total += totalOrderPrice(i);
+		}
+
+		return total;
 	}
 
 	/**
 	 * sorts the orders within this bevShop using the Selection sort algorithm
 	 */
 	public void sortOrders() {
+
+		for (int i = 1; i < orderList.size(); i++) {
+
+			double highestOrderTotal = totalOrderPrice(0); // highest total in order lists
+			int highestOrderIndex = 0; // index of highest order
+
+			if (totalOrderPrice(i) > highestOrderTotal) {
+				highestOrderTotal = totalOrderPrice(i);
+				highestOrderIndex = i;
+			}
+		}
+
+		// sorted order array
+		for (int i = 0; i < orderList.size(); i++) {
+			System.out.println(orderList.get(i));
+		}
 	}
 
 	/**
@@ -184,11 +281,26 @@ public class BevShop implements BevShopInterface {
 	 * @return Order in the list of orders at the index
 	 */
 	public Order getOrderAtIndex(int index) {
+
+		int i = 0;
+
+		for (i = 0; i < orderList.size(); i++) {
+			if (index == i) {
+				orderList.get(index).equals(orderList.get(i));
+			}
+		}
+		return orderList.get(i);
 	}
 
+	@Override
+	/**
+	 * print sorted orders and monthly salary
+	 */
 	public String toString() {
-		String str = "" ;
-		return str + " Monthly Sales: " + /*monthlySales()*/;
+
+		String str = "Orders: \n" + totalMonthlySale() + "\n";
+
+		return str + " Monthly Sales: " + totalMonthlySale();
 	}
 
 }

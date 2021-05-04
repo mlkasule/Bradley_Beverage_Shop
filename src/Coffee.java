@@ -16,6 +16,12 @@ public class Coffee extends Beverage {
 		this.extraShotCoffee = extraShotCoffee;
 		this.extraShotSyrup = extraShotSyrup;
 	}
+	
+	public Coffee(String name, SIZE size, boolean extraShotCoffee, boolean extraShotSyrup) {
+		super(name, size);
+		this.extraShotCoffee = extraShotCoffee;
+		this.extraShotSyrup = extraShotSyrup;
+	}
 
 	public boolean isExtraShotCoffee() {
 		return extraShotCoffee;

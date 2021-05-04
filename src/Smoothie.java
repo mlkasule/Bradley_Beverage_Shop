@@ -16,6 +16,12 @@ public class Smoothie extends Beverage {
 		this.numOfFruits = numOfFruits;
 		this.addProtein = addProtein;
 	}
+	public Smoothie(String name, SIZE size, int numOfFruits, boolean addProtein) {
+		super(name, size);
+		this.numOfFruits = numOfFruits;
+		this.addProtein = addProtein;
+	}
+
 
 	public int getNumOfFruits() {
 		return numOfFruits;

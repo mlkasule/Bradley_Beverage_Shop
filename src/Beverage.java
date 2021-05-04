@@ -24,6 +24,10 @@ public abstract class Beverage {
 		this.type = type;
 		this.size = size;
 	}
+	public Beverage(String name, SIZE size) {
+		this.name = name;
+		this.size = size;
+	}
 
 	public Beverage(Beverage drinks) {
 		this.name = drinks.name;
